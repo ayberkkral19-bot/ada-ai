@@ -24,7 +24,7 @@ async function handleChat(event) {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${API_KEY}`
       },
-      body: JSON.stringify({ model, messages, max_tokens, temperature })
+      body: JSON.stringify({ model, messages, max_tokens, temperature, tool_choice: 'none', tools: [] })
     });
 
     const data = await response.json();
