@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>URC Takimi</title>
+<title>URC Takımı</title>
 <link rel="icon" type="image/png" href="URC.png">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#0a0a0a;--surface:#141414;--card:#1a1a1a;--border:#2a2a2a;--text:#e8e8e8;--text2:#999;--accent:#10a37f;--accent2:#6c5ce7;--glow:rgba(16,163,127,.15)}
+:root{--bg:#0a0a0a;--surface:#141414;--card:#1a1a1a;--border:#2a2a2a;--text:#e8e8e8;--text2:#999;--accent:#dc3545;--accent2:#6c5ce7;--glow:rgba(220,53,69,.15)}
 body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
 a{text-decoration:none;color:var(--accent)}
 .container{max-width:1100px;margin:0 auto;padding:0 20px}
@@ -18,8 +18,7 @@ nav .container{display:flex;align-items:center;justify-content:space-between}
 .nav-brand{display:flex;align-items:center;gap:10px;font-size:18px;font-weight:700}
 .nav-brand img{width:32px;height:32px;border-radius:50%}
 .nav-links{display:flex;gap:8px}
-.nav-links a{padding:8px 16px;border-radius:8px;font-size:13px;font-weight:500;color:var(--text2);transition:all .2s}
-.nav-links a:hover{background:var(--card);color:var(--text)}
+.nav-links a{padding:8px 16px;border-radius:8px;font-size:13px;font-weight:500;color:var(--text2)}
 
 /* HERO */
 .hero{text-align:center;padding:80px 20px 60px}
@@ -37,26 +36,23 @@ section{padding:60px 0}
 
 /* PROJECTS */
 .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px}
-.project-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;transition:all .3s;position:relative;overflow:hidden}
-.project-card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.3)}
+.project-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;position:relative;overflow:hidden}
 .project-card.disabled{opacity:.5}
-.project-card.disabled::after{content:'DEVRE DISI';position:absolute;top:16px;right:16px;background:#e74c3c;color:white;padding:4px 10px;border-radius:6px;font-size:11px;font-weight:700}
+.project-card.disabled::after{content:'DEVRE DIŞI';position:absolute;top:16px;right:16px;background:#e74c3c;color:white;padding:4px 10px;border-radius:6px;font-size:11px;font-weight:700}
 .project-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}
 .project-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0}
-.project-icon.ai{background:linear-gradient(135deg,var(--accent),#1a8a6a)}
+.project-icon.ai{background:linear-gradient(135deg,var(--accent),#b02a37)}
 .project-icon.discord{background:linear-gradient(135deg,#5865F2,#4752c4)}
-.project-icon.ada{background:linear-gradient(135deg,var(--accent),#1a8a6a)}
+.project-icon.ada{background:linear-gradient(135deg,var(--accent),#b02a37)}
 .project-name{font-size:16px;font-weight:600}
-.project-tag{font-size:11px;padding:2px 8px;border-radius:4px;background:rgba(16,163,127,.15);color:var(--accent);display:inline-block;margin-top:4px}
+.project-tag{font-size:11px;padding:2px 8px;border-radius:4px;background:rgba(220,53,69,.15);color:var(--accent);display:inline-block;margin-top:4px}
 .project-desc{color:var(--text2);font-size:13px;line-height:1.7;margin-bottom:16px}
-.project-link{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:8px;background:var(--accent);color:white;font-size:13px;font-weight:500;transition:all .2s}
-.project-link:hover{background:#0e8c6b;transform:scale(1.02)}
+.project-link{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:8px;background:var(--accent);color:white;font-size:13px;font-weight:500}
 .project-link.disabled-link{background:#444;cursor:not-allowed;pointer-events:none}
 
 /* TEAM */
 .team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
-.team-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;display:flex;align-items:center;gap:16px;transition:all .3s}
-.team-card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.team-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;display:flex;align-items:center;gap:16px}
 .team-avatar{width:56px;height:56px;border-radius:50%;object-fit:cover;border:2px solid var(--border)}
 .team-name{font-size:15px;font-weight:600;margin-bottom:2px}
 .team-role{font-size:12px;color:var(--accent);font-weight:500}
@@ -94,19 +90,19 @@ section{padding:60px 0}
     </div>
     <div class="nav-links">
       <a href="#projeler">Projeler</a>
-      <a href="#uye">Uyeler</a>
-      <a href="#hakkinda">Hakkinda</a>
+      <a href="#uyeler">Üyeleri</a>
+      <a href="#hakkinda">Hakkında</a>
     </div>
   </div>
 </nav>
 
 <section class="hero">
   <img src="URC.png" alt="URC">
-  <h1>URC <span>Takimi</span></h1>
-  <p>Turkiye'nin gurur kaynagi, yenilikci teknoloji ve proje ekibi</p>
+  <h1>URC <span>Takımı</span></h1>
+  <p>Türkiye'nin gurur kaynağı, yenilikçi teknoloji ve proje ekibi</p>
   <div class="hero-badge">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-    Turkiye Gururlandirmak Icin Var Oluyoruz
+    Türkiye'yi Gururlandırmak İçin Var Oluyoruz
   </div>
 </section>
 
@@ -116,7 +112,7 @@ section{padding:60px 0}
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
       Projelerimiz
     </h2>
-    <p class="section-desc">URC tarafindan gelistirilen projeler</p>
+    <p class="section-desc">URC tarafından geliştirilen projeler</p>
 
     <div class="projects-grid">
 
@@ -128,7 +124,7 @@ section{padding:60px 0}
             <span class="project-tag">1. Yapay Zeka</span>
           </div>
         </div>
-        <p class="project-desc">URC'nin ilk yapay zekasiydi. Simdi devre disi kaldi ve yerini Ada'ya birakti. Gelistirme sureci tamamlandi.</p>
+        <p class="project-desc">URC'nin ilk yapay zekasıydı. Şimdi devre dışı kaldı ve yerini Ada'ya bıraktı. Geliştirme süreci tamamlandı.</p>
       </div>
 
       <div class="project-card">
@@ -136,13 +132,13 @@ section{padding:60px 0}
           <div class="project-icon ada"><img src="Ada.png" style="width:32px;height:32px;border-radius:8px" alt="Ada"></div>
           <div>
             <div class="project-name">Ada</div>
-            <span class="project-tag">2. Yapay Zeka - EN GELISMIS</span>
+            <span class="project-tag">2. Yapay Zeka - EN GELİŞMİŞ</span>
           </div>
         </div>
-        <p class="project-desc">URC'nin en gelismis yapay zekasi. Kod yazar, oyun gelistirir, gorsel arar, her konuda yardimci olur. Dunyanin en zekisi.</p>
+        <p class="project-desc">URC'nin en gelişmiş yapay zekası. Kod yazar, oyun geliştirir, görsel arar, her konuda yardımcı olur. Dünyanın en zekisi.</p>
         <a href="https://adatr.netlify.app/" target="_blank" class="project-link">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-          Ada'yi Kesfet
+          Ada'yı Keşfet
         </a>
       </div>
 
@@ -154,7 +150,7 @@ section{padding:60px 0}
             <span class="project-tag">2. Proje</span>
           </div>
         </div>
-        <p class="project-desc">Discord icin gelistirilmis ozel bir arac. Bedava Orbs kastirarak parali olan Nitro'yu ucretsiz almanizi saglar.</p>
+        <p class="project-desc">Discord için geliştirilmiş özel bir araç. Bedava Orbs kastırarak paralı olan Nitro'yu ücretsiz almanızı sağlar.</p>
       </div>
 
       <div class="project-card">
@@ -165,10 +161,10 @@ section{padding:60px 0}
             <span class="project-tag">3. Proje</span>
           </div>
         </div>
-        <p class="project-desc">Ada'nin canli versiyonu. Turk yapay zekasi ile tanisin, sorularinizi sorun, yardimci olsun.</p>
+        <p class="project-desc">Ada'nın canlı versiyonu. Türk yapay zekası ile tanışın, sorularınızı sorun, yardımcı olsun.</p>
         <a href="https://adatr.netlify.app/" target="_blank" class="project-link">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-          Canliyasina Git
+          Canlıyasına Git
         </a>
       </div>
 
@@ -176,13 +172,13 @@ section{padding:60px 0}
   </div>
 </section>
 
-<section id="uye">
+<section id="uyeler">
   <div class="container">
     <h2 class="section-title">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-      URC Takimi Uyeleri
+      URC Takımı Üyeleri
     </h2>
-    <p class="section-desc">Basarili ekibimiz</p>
+    <p class="section-desc">Başarılı ekibimiz</p>
 
     <div class="team-grid">
 
@@ -198,7 +194,7 @@ section{padding:60px 0}
         <img src="Download.jpg" alt="Atahan" class="team-avatar">
         <div>
           <div class="team-name">Atahan T.</div>
-          <div class="team-role">Gelistirici</div>
+          <div class="team-role">Geliştirici</div>
         </div>
       </div>
 
@@ -206,7 +202,7 @@ section{padding:60px 0}
         <img src="Download.jpg" alt="Kaan" class="team-avatar">
         <div>
           <div class="team-name">Kaan D.</div>
-          <div class="team-role">Yonetici</div>
+          <div class="team-role">Yönetici</div>
         </div>
       </div>
 
@@ -214,7 +210,7 @@ section{padding:60px 0}
         <img src="Download.jpg" alt="Huseyin" class="team-avatar">
         <div>
           <div class="team-name">Huseyin B.</div>
-          <div class="team-role">Gelistirici</div>
+          <div class="team-role">Geliştirici</div>
         </div>
       </div>
 
@@ -222,15 +218,15 @@ section{padding:60px 0}
         <img src="Download.jpg" alt="Ercan" class="team-avatar">
         <div>
           <div class="team-name">Ercan A.</div>
-          <div class="team-role">Yonetici</div>
+          <div class="team-role">Yönetici</div>
         </div>
       </div>
 
       <div class="team-card">
         <img src="Download.jpg" alt="Cinar" class="team-avatar">
         <div>
-          <div class="team-name">Cinar Mert E.</div>
-          <div class="team-role">Ust Duzey Gelistirici</div>
+          <div class="team-name">Cınar Mert E.</div>
+          <div class="team-role">Üst Düzey Geliştirici</div>
         </div>
       </div>
 
@@ -242,33 +238,33 @@ section{padding:60px 0}
   <div class="container">
     <h2 class="section-title">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-      URC Hakkinda
+      URC Hakkında
     </h2>
-    <p class="section-desc">Ekibimiz hakkinda</p>
+    <p class="section-desc">Ekibimiz hakkında</p>
 
     <div class="about-content">
-      <p><strong>URC</strong>, oyun gelistirmeden web tasarimina, akilli proje fikirlerinden yazilim mekaniklerine kadar genis bir alanda uretim yapan yenilikci bir teknoloji ve proje ekibidir.</p>
+      <p><strong>URC</strong>, oyun geliştirmeden web tasarımına, akıllı proje fikirlerinden yazılım mekaniklerine kadar geniş bir alanda üretim yapan yenilikçi bir teknoloji ve proje ekibidir.</p>
 
-      <h3>Ekibin one cikan temel faaliyetleri ve yetenek alanlari:</h3>
+      <h3>Ekibin öne çıkan temel faaliyetleri ve yetenek alanları:</h3>
 
-      <p><strong>Oyun Gelistirme ve Scripting:</strong> Roblox Studio uzerinde Luau diliyle ozel oyun mekanikleri, harita dogma sistemleri ve karakter yetenekleri yazma; 2D platform oyunlari ve oyun ici sistemler kurgulama.</p>
+      <p><strong>Oyun Geliştirme ve Scripting:</strong> Roblox Studio üzerinde Luau diliyle özel oyun mekanikleri, harita doğma sistemleri ve karakter yetenekleri yazma; 2D platform oyunları ve oyun içi sistemler kurgulama.</p>
 
-      <p><strong>Web Tasarim ve Proje Gelistirme:</strong> Etkilesimli web arayuzleri (HTML, CSS, JavaScript) tasarlayip bunlari canliya alma; "SloTe" ve "Selfie" gibi uygulama konseptleri uretme.</p>
+      <p><strong>Web Tasarım ve Proje Geliştirme:</strong> Etkileşimli web arayüzleri (HTML, CSS, JavaScript) tasarlayıp bunları canlıya alma; "SloTe" ve "Selfie" gibi uygulama konseptleri üretme.</p>
 
-      <p><strong>Akilli Teknolojiler and Yarisma Projeleri:</strong> Teknofest gibi organizasyonlar icin sensor tabanli otomasyon fikirleri (ornegin yagmur sensorlu akilli camasir askiligi) gelistirme.</p>
+      <p><strong>Akıllı Teknolojiler ve Yarışma Projeleri:</strong> Teknofest gibi organizasyonlar için sensör tabanlı otomasyon fikirleri (örneğin yağmur sensörlü akıllı çamaşır askılığı) geliştirme.</p>
 
-      <p><strong>Icerik ve Gorsel Tasarim:</strong> Dijital projeler, oyun modlari ve gorsel tasarimlar ureterek ekibin projelerini sunulabilir hale getirme.</p>
+      <p><strong>İçerik ve Görsel Tasarım:</strong> Dijital projeler, oyun modları ve görsel tasarımlar üreterek ekibin projelerini sunulabilir hale getirme.</p>
 
-      <p>URC, fikirleri hizlica calisan yazilimlara ve somut projelere donusturen dinamik bir calisma anlayisina sahiptir.</p>
+      <p>URC, fikirleri hızla çalışan yazılımlara ve somut projelere dönüştüren dinamik bir çalışma anlayışına sahiptir.</p>
     </div>
   </div>
 </section>
 
 <section class="footer">
   <div class="footer-flag">🇹🇷</div>
-  <h2>Turkiye'yi Gururlandirmak Istiyoruz</h2>
-  <p>Teknoloji ureterek, projeler gelistirerek ve yenilikci fikirlerle dunyaya acilmak istiyoruz.</p>
-  <p class="coming">Yakinda bir cok projemiz daha gelecektir, kacirmayin!</p>
+  <h2>Türkiye'yi Gururlandırmak İstiyoruz</h2>
+  <p>Teknoloji üreterek, projeler geliştirerek ve yenilikçi fikirlerle dünyaya açılmak istiyoruz.</p>
+  <p class="coming">Yakında bir çok projemiz daha gelecektir, kaçırmayın!</p>
 </section>
 
 </body>
