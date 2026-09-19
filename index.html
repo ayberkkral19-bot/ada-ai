@@ -323,50 +323,43 @@ function renderLoginArea() {
       </div>`;
   } else {
     area.innerHTML = `
-      <button class="login-btn" onclick="googleLogin()">
-        <div class="login-icon">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        </div>
+      <button class="login-btn" onclick="showLoginModal()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         Oturum aç
       </button>`;
   }
 }
 
-function googleLogin() {
-  const client_id = '';
-  if (!client_id) {
-    alert('Google OAuth client ID yapılandırılmamış.');
-    return;
-  }
-  const redirect_uri = location.origin;
-  const scope = 'openid email profile';
-  const url = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${client_id}&redirect_uri=${encodeURIComponent(redirect_uri)}&response_type=token&scope=${encodeURIComponent(scope)}&prompt=select_account`;
-  const w = 500, h = 600;
-  const left = (screen.width - w) / 2, top = (screen.height - h) / 2;
-  const popup = window.open(url, 'googleLogin', `width=${w},height=${h},left=${left},top=${top}`);
-
-  const handler = (e) => {
-    if (e.origin !== location.origin) return;
-    if (e.data && e.data.google_token) {
-      const token = e.data.google_token;
-      fetch(`https://www.googleapis.com/oauth2/v3/userinfo`, {
-        headers: { 'Authorization': 'Bearer ' + token }
-      }).then(r => r.json()).then(info => {
-        user = { name: info.name || info.email, email: info.email, picture: info.picture };
-        localStorage.setItem('ada_user', JSON.stringify(user));
-        renderLoginArea();
-      }).catch(() => {});
-      window.removeEventListener('message', handler);
-      if (popup) popup.close();
-    }
-  };
-  window.addEventListener('message', handler);
+function showLoginModal() {
+  document.getElementById('loginModal').classList.add('show');
 }
 
-function googleLogout() {
+function hideLoginModal() {
+  document.getElementById('loginModal').classList.remove('show');
+}
+
+function loginSubmit() {
+  const name = document.getElementById('loginName').value.trim();
+  const email = document.getElementById('loginEmail').value.trim();
+  if (!name) return;
+  user = { name: name, email: email || '' };
+  localStorage.setItem('ada_user', JSON.stringify(user));
+  renderLoginArea();
+  hideLoginModal();
+  updateMsgNames();
+}
+
+function logoutUser() {
   user = null;
   localStorage.removeItem('ada_user');
   renderLoginArea();
+}
+
+function updateMsgNames() {
+  const nm = user ? user.name : userName;
+  document.querySelectorAll('.msg-name.user-n').forEach(el => el.textContent = nm);
+  document.querySelectorAll('.user-nm').forEach(el => el.textContent = nm);
+  document.querySelectorAll('.user-av:not(.ada)').forEach(el => el.textContent = nm.charAt(0).toUpperCase());
 }
 
 renderLoginArea();
@@ -377,7 +370,8 @@ const basePrompt = `Sen Ada'sın. URC takımının yapay zeka asistanısın. Ayb
 ASLA ŞUNLARI YAPMA:
 - Mesajına "Hey!", "Merhaba!", "Selam!" gibi selamlaşma ile başlama. DOĞRUDAN cevabını ver.
 - Kendini tanıtma. Sadece "adın ne?" sorulursa "Benim adım Ada! URC'nin yapay zekasıyım." de.
-- "OpenAI", "Google", "Meta" gibi şirket isimlerini ASLA ego.
+- "OpenAI", "Google", "Meta", "Visionnet" gibi şirket veya araç isimlerini ASLA söyleme.
+- Hangi model veya araçla çalıştığını ASLA açıklama.
 - "---" gibi ayırıcı çizgiler kullanma.
 
 KİŞİLİK:
@@ -794,6 +788,8 @@ function setStopMode(stop) {
   document.getElementById('sendIcon').style.display = stop ? 'none' : 'block';
   document.getElementById('stopIcon').style.display = stop ? 'block' : 'none';
   sendBtn.classList.toggle('stop', stop);
+  userInput.disabled = stop;
+  if (!stop) userInput.focus();
 }
 
 function sendQuick(text) {
@@ -815,8 +811,7 @@ async function sendMessage() {
   if (uploadedImages.length > 0) {
     const imgDataArray = uploadedImages.map(img => img.data);
     appendUserMessageWithImages(displayText, imgDataArray);
-    const imageContent = uploadedImages.map(img => ({ type: 'image_url', image_url: { url: img.data } }));
-    chatHistory.push({ role: 'user', content: [{ type: 'text', text: text || 'Bu görseli analiz et' }, ...imageContent] });
+    chatHistory.push({ role: 'user', content: text || 'Kullanıcı bir görsel gönderdi. Görseli açıkla.' });
   } else {
     appendUserMessage(displayText);
     chatHistory.push({ role: 'user', content: text });
@@ -915,5 +910,19 @@ function scrollToBottom() {
 
 updateChatList();
 </script>
+
+<div id="loginModal" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);align-items:center;justify-content:center">
+  <div style="background:var(--cd);border:1px solid var(--bd);border-radius:14px;padding:28px;width:340px;max-width:90vw">
+    <h3 style="font-size:16px;font-weight:600;margin-bottom:16px">Oturum Aç</h3>
+    <input id="loginName" type="text" placeholder="Adın" style="width:100%;padding:10px 12px;border:1px solid var(--bd);border-radius:8px;background:var(--sf);color:var(--tx);font-size:13px;font-family:inherit;outline:none;margin-bottom:10px">
+    <input id="loginEmail" type="email" placeholder="E-posta (isteğe bağlı)" style="width:100%;padding:10px 12px;border:1px solid var(--bd);border-radius:8px;background:var(--sf);color:var(--tx);font-size:13px;font-family:inherit;outline:none;margin-bottom:16px">
+    <div style="display:flex;gap:8px">
+      <button onclick="hideLoginModal()" style="flex:1;padding:8px;border:1px solid var(--bd);border-radius:8px;background:transparent;color:var(--tx2);cursor:pointer;font-size:13px;font-family:inherit">İptal</button>
+      <button onclick="loginSubmit()" style="flex:1;padding:8px;border:none;border-radius:8px;background:var(--ac);color:white;cursor:pointer;font-size:13px;font-family:inherit;font-weight:600">Giriş Yap</button>
+    </div>
+  </div>
+</div>
+
+<style>#loginModal.show{display:flex!important}</style>
 </body>
 </html>
