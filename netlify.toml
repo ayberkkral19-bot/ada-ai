@@ -11,7 +11,7 @@
 
 [[redirects]]
   from = "/api/voice"
-  to = "/.netlify/functions/voice"
+  to = "/.netlify/functions/chat"
   status = 200
 
 [[redirects]]
