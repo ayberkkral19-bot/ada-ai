@@ -6,11 +6,11 @@ load_dotenv(os.path.join(os.path.dirname(os.path.abspath(__file__)), '.env'))
 GROQ_API_KEY = os.getenv('GROQ_API_KEY', '')
 ELEVENLABS_API_KEY = os.getenv('ELEVENLABS_API_KEY', '')
 GROQ_MODEL = os.getenv('GROQ_MODEL', 'openai/gpt-oss-20b')
-VOICE_ID_MALE = os.getenv('VOICE_ID_MALE', '75SIZa3vvET95PHhf1yD')
+VOICE_ID_MALE = os.getenv('VOICE_ID_MALE', 'c1An0BcfdBgMtEqajijL')
 VOICE_ID_FEMALE = os.getenv('VOICE_ID_FEMALE', 'mnEe2Jhwlupp6oZEDi3k')
 WAKE_WORD = os.getenv('WAKE_WORD', 'hey jarvis')
 DEFAULT_LANGUAGE = os.getenv('DEFAULT_LANGUAGE', 'tr-TR')
-TTS_ENGINE = os.getenv('TTS_ENGINE', 'edge')
+TTS_ENGINE = os.getenv('TTS_ENGINE', 'elevenlabs')
 
 DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'jarvis_memory.db')
 
