@@ -8,3 +8,13 @@
   from = "/api/chat"
   to = "/.netlify/functions/chat"
   status = 200
+
+[[redirects]]
+  from = "/api/voice"
+  to = "/.netlify/functions/voice"
+  status = 200
+
+[[redirects]]
+  from = "/api/search"
+  to = "/.netlify/functions/chat"
+  status = 200

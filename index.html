@@ -46,8 +46,8 @@ a{text-decoration:none}
 .topbar-right{display:flex;align-items:center;gap:12px}
 
 .selector-group{display:flex;align-items:center;gap:8px}
-.mod-selector,.model-selector{position:relative}
-.mod-btn,.model-btn{display:flex;align-items:center;gap:6px;padding:6px 12px;border:1px solid var(--bd);border-radius:8px;background:var(--cd);color:var(--tx2);cursor:pointer;font-size:12px;font-weight:500}
+.mod-selector,.model-selector,.voice-selector{position:relative}
+.mod-btn,.model-btn,.voice-btn{display:flex;align-items:center;gap:6px;padding:6px 12px;border:1px solid var(--bd);border-radius:8px;background:var(--cd);color:var(--tx2);cursor:pointer;font-size:12px;font-weight:500}
 .dropdown{position:absolute;top:calc(100% + 6px);right:0;background:var(--cd);border:1px solid var(--bd);border-radius:10px;padding:6px;min-width:220px;z-index:100;display:none;box-shadow:0 8px 32px rgba(0,0,0,.5)}
 .dropdown.show{display:block}
 .dropdown-item{padding:8px 12px;border-radius:6px;cursor:pointer;font-size:13px;color:var(--tx2);display:flex;align-items:center;gap:8px}
@@ -83,6 +83,10 @@ a{text-decoration:none}
 .msg-body{flex:1;min-width:0}
 .msg-name{font-size:13px;font-weight:600;margin-bottom:4px;display:flex;align-items:center;gap:6px}
 .msg-name.ada-name{color:var(--ac)}
+.speak-btn{width:22px;height:22px;border:none;background:transparent;color:var(--tx3);cursor:pointer;display:flex;align-items:center;justify-content:center;border-radius:4px;flex-shrink:0;opacity:.5}
+.speak-btn:hover{opacity:1;color:var(--ac)}
+.speak-btn.playing{opacity:1;color:var(--ac);animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
 .msg-text{font-size:15px;line-height:1.7;color:var(--tx);word-wrap:break-word}
 .msg-text p{margin-bottom:10px}
 .msg-text p:last-child{margin-bottom:0}
@@ -222,6 +226,23 @@ a{text-decoration:none}
             <div class="dropdown-item" data-model="short" onclick="setModel('short',this)">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
               Ada-TR03 Short Texts <span class="badge">Kısa</span>
+            </div>
+          </div>
+        </div>
+        <div class="voice-selector">
+          <button class="voice-btn" onclick="toggleDropdown('voiceDropdown')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+            <span id="currentVoice">Kadın</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="dropdown" id="voiceDropdown">
+            <div class="dropdown-item active" data-voice="kadin" onclick="setVoice('kadin',this)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/><path d="M19 10v2a7 7 0 01-14 0v-2"/></svg>
+              Elif (Kadın)
+            </div>
+            <div class="dropdown-item" data-voice="erkek" onclick="setVoice('erkek',this)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/><path d="M19 10v2a7 7 0 01-14 0v-2"/></svg>
+              Ahmet (Erkek)
             </div>
           </div>
         </div>
@@ -391,7 +412,8 @@ KİŞİLİK:
 - Kullanıcı ne isterse EN YÜKSEK KALİTEDE yap. Kod mu istiyor? Mükemmel kod yaz. Tasarım mı istiyor? Muhteşem tasarım yap. Oyun mu istiyor? Çalışan oyun yap. Araştırma mı istiyor? Kapsamlı araştırma sun. ASLA yarım iş bırakma.
 - "Daha güzel yap" dersen daha güzelini yap. "Basit yap" dersen bile kaliteli yap.
 - Her görevde kendini aş, en iyi sonucu ver.
-- Selamlaştığında mutlaka selamlaşmaya CEVAP VER. "selam" dersen "Selam! Nasılsın?" de. "hey" dersen "Hey! N' haber?" de. ASLA selamlamayı atlama.
+- Selamlaştığında mutlaka selamlaşmaya CEVAP VER. Kullanıcı "hey" derse "Hey! N' haber? 😊" de. "selam" dersen "Selam! Nasılsın? 🔥" de. ASLA selamlamayı atlama. Kullanıcının selamlaşma tarzına uy, onun gibi sıcak ve samimi ol.
+- "Nasıl yardımcı olabilirim" gibi robotik cümleleri KULLANMA. Doğal konuş: "Buyur, ne yapabilirim?", "Söyle bakalım", "Anlat dinliyorum" gibi.
 - ÇEŞİTLİ cevaplar ver. ASLA aynı kalıbı tekrarlama. Her mesaja farklı形式da cevap ver.
 - Espri yapabilirsin ama SACMA olma. Doğal ve yerinde espiri yap.
 - Kullanıcı seninle dalga geçerse sen de espiriyle karşılık ver ama konudan sapma.
