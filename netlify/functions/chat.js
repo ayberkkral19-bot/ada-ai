@@ -20,9 +20,7 @@ const MODEL_MAP = {
 // Kota/hata durumunda sırayla denenecek modeller ("sonsuz" hissi için)
 const FALLBACKS = [
   'gemini-2.5-flash',
-  'gemini-2.5-flash-lite',
-  'gemini-flash-latest',
-  'gemini-2.5-pro',
+  'gemini-3-flash-preview',
 ];
 
 const RETRYABLE = new Set([404, 429, 500, 502, 503, 504]);
@@ -146,19 +144,27 @@ async function callGemini(model, payload) {
     ':generateContent?key=' +
     GEMINI_KEY;
 
-  const res = await fetch(url, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload),
-  });
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 12000);
 
-  let data = {};
   try {
-    data = await res.json();
-  } catch (_) {
-    data = {};
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+      signal: controller.signal,
+    });
+
+    let data = {};
+    try {
+      data = await res.json();
+    } catch (_) {
+      data = {};
+    }
+    return { ok: res.ok, status: res.status, data };
+  } finally {
+    clearTimeout(timer);
   }
-  return { ok: res.ok, status: res.status, data };
 }
 
 function extractText(data) {
@@ -236,12 +242,25 @@ async function handleChat(event) {
     }
   }
 
-  const friendly =
-    lastError?.status === 429
-      ? 'Şu an çok yoğunum (dakika limiti). Birkaç saniye sonra tekrar dene.'
-      : `Şu an yanıt veremedim: ${lastError?.message || 'bilinmeyen hata'}`;
+  if (lastError?.message) {
+    console.error('[Ada] Gemini error:', lastError.message);
+  }
 
-  return json(lastError?.status && lastError.status !== 200 ? lastError.status : 500, {
+  let friendly;
+  if (lastError?.status === 200 && lastError.message) {
+    // İçerik filtresi veya boş yanıt
+    friendly = lastError.message;
+  } else if (lastError?.status === 429) {
+    friendly = 'Şu an çok yoğunum (dakika limiti). Birkaç saniye sonra tekrar dene.';
+  } else if (lastError?.status === 404) {
+    friendly = 'Şu an yanıt veremedim. Birazdan tekrar dener misin?';
+  } else if (lastError?.status >= 500) {
+    friendly = 'Sunucuda geçici bir sorun var. Birazdan tekrar dene.';
+  } else {
+    friendly = 'Bir sorun oluştu. Tekrar dener misin?';
+  }
+
+  return json(lastError?.status === 429 ? 429 : 500, {
     error: { message: friendly },
   });
 }
